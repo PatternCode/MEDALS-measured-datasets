@@ -2,9 +2,9 @@
 
 This repository contains measured Laser-Induced Breakdown Spectroscopy (LIBS) datasets collected within the Horizon Europe **MEDALS** project — *Metallic Elements Dissipation Avoided by Life cycle design for Steel* (Grant Agreement No. 101138516).
 
-The repository accompanies **Deliverable D4.6 — MeasData: Open measured data set** and provides the measured spectral datasets made available to the University of Limerick (UL) during the project.
+The repository accompanies **Deliverable D4.6 — MeasData: Open measured data set** and contains the measured spectral datasets made available to the University of Limerick (UL) during the project.
 
-The repository is intentionally kept simple: the original data are stored in their dataset folders, one top-level README documents the datasets, and a lightweight Streamlit viewer can be used for visual inspection of spectra.
+The repository is intentionally simple: the measured data are preserved in their dataset folders, this `README.md` provides the main documentation, and `viewer.py` provides a lightweight Streamlit interface for browsing and visualising the spectra.
 
 ---
 
@@ -33,22 +33,22 @@ MEDALS-measured-datasets/
 │   ├── SS405/
 │   ├── SS465-1/
 │   ├── SS467/
-│   ├── reference_compositions.json
 │   ├── Einstellungen.txt
+│   ├── reference_compositions.json
 │   └── *.jpeg
 │
 ├── Medals_MovingSamples_2026-04-29/
-│   ├── *.csv
-│   └── *.jpeg
+│   ├── 15 spectral CSV files
+│   └── 5 JPEG images
 │
 └── July2026_ScrapSamples/
     ├── ScrapSamples/
-    │   └── *.csv
+    │   └── 26 spectral CSV files
     └── SteelGrades/
-        └── *.csv
+        └── 7 spectral CSV files
 ```
 
-The original dataset directory names and spectral filenames are preserved.
+The current repository contains **22 directories and 140 files**. The original dataset directory names and spectral filenames have been preserved.
 
 ---
 
@@ -62,9 +62,9 @@ Three main measured sub-datasets are included.
 | `Medals_MovingSamples_2026-04-29` | 15 sample IDs / 15 CSV files | 79 | 2,048 | 341.952–896.916 nm | Measurements acquired under moving-sample conditions |
 | `July2026_ScrapSamples` | 33 CSV files | 698 | 2,048 | 341.952–896.916 nm | Scrap samples and labelled industrial material grades |
 
-All three datasets use the same 2,048-channel wavelength grid, allowing spectral columns to be aligned directly by wavelength.
+All three sub-datasets use the same **2,048-channel wavelength grid**, so their spectral columns can be aligned directly by wavelength.
 
-However, matching wavelength grids do **not** imply identical acquisition conditions. Exposure settings, sample motion, timing, geometry, and other acquisition parameters differ or are incompletely documented across datasets.
+The datasets differ in sample organisation, number of spectra per sample, availability of reference composition information, and measurement conditions. These differences should be considered when comparing the datasets or using them for data analysis.
 
 ---
 
@@ -77,7 +77,9 @@ The repository contains two main types of samples with known material informatio
 
 ## 2.1 BAS/BCS Reference Materials
 
-The reference materials include ferritic stainless-steel standards `469–473` and phosphor-bronze standards `551–556`.
+The reference materials comprise ferritic stainless-steel standards `469–473` and phosphor-bronze standards `551–556`.
+
+### BAS/BCS reference compositions
 
 | Sample | Reference material | Matrix | Reference composition (wt.%) |
 |---|---|---|---|
@@ -99,13 +101,14 @@ The reference materials include ferritic stainless-steel standards `469–473` a
 - All other listed values are certified unless otherwise stated.
 - For Fe-based reference materials, Fe represents the balance of the composition.
 - For Cu-based reference materials, Cu represents the balance where appropriate.
-- `Medals_Samples_Feb26/reference_compositions.json` contains the composition metadata distributed with the spectra.
-- The JSON does not explicitly state the concentration unit or mass/atomic basis. The values are reported here as wt.% according to the associated BAS/BCS reference information.
-- Some older source tables retain qualifiers such as `<0.005`; these should not automatically be interpreted as exact concentrations.
+- The file `Medals_Samples_Feb26/reference_compositions.json` contains the reference-composition metadata included with the dataset.
+- Some original composition sources use qualifiers such as `<0.005`; these should not be interpreted as exact concentrations.
 
 ## 2.2 European Material Grades
 
-The July dataset contains seven labelled European material grades. The values below are **published grade specifications or nominal ranges**, not certified sample-specific concentrations.
+The `SteelGrades` directory in `July2026_ScrapSamples` contains seven labelled European material grades.
+
+The values below are **published grade specifications or nominal composition ranges**, not certified sample-specific concentrations.
 
 | Material no. | Common designation | Material family | Published composition / specification (wt.%) |
 |---|---|---|---|
@@ -125,6 +128,8 @@ The July dataset contains seven labelled European material grades. The values be
 
 The spectral files are semicolon-separated CSV files.
 
+A typical file has the following structure:
+
 ```text
 MeasCtr;TimeStamp;341.952;342.246;342.54;...;896.916
 0;...;...;...;...;...;...
@@ -133,10 +138,10 @@ MeasCtr;TimeStamp;341.952;342.246;342.54;...;896.916
 
 The first two columns contain metadata:
 
-- `MeasCtr` — measurement counter.
-- `TimeStamp` — integer acquisition timestamp.
+- `MeasCtr` — measurement counter
+- `TimeStamp` — integer acquisition timestamp
 
-The remaining **2,048 columns** contain spectral intensity values.
+The remaining **2,048 columns** contain spectral intensity values, with wavelengths in nanometres used as column headers.
 
 | Property | Specification |
 |---|---|
@@ -150,7 +155,7 @@ The remaining **2,048 columns** contain spectral intensity values.
 | Intensity representation | Integer values |
 | Physical intensity unit | Not documented |
 
-The channel spacing should **not** be interpreted as the optical spectral resolution of the spectrometer. Optical resolution is not specified in the available metadata.
+The wavelength-channel spacing is a sampling property and should not be interpreted as the optical spectral resolution.
 
 ---
 
@@ -158,9 +163,11 @@ The channel spacing should **not** be interpreted as the optical spectral resolu
 
 ## 4.1 Overview
 
-This sub-dataset contains LIBS measurements from **16 sample IDs**. Each sample is represented by **five CSV files**, and each file contains **40 individual spectra**, giving 200 spectra per sample and 3,200 spectra in total.
+This sub-dataset contains LIBS measurements from **16 sample IDs** and **80 CSV files**, corresponding to **3,200 spectra**.
 
-Despite the directory name `Medals_Samples_Feb26`, the acquisition dates encoded in the filenames correspond to **11 March 2026**.
+Each sample is represented by five CSV files, and each file contains 40 spectra. Therefore, each sample contributes 200 spectra.
+
+Despite the directory name `Medals_Samples_Feb26`, the acquisition dates encoded in the CSV filenames correspond to **11 March 2026**.
 
 ## 4.2 General Specifications
 
@@ -174,7 +181,7 @@ Despite the directory name `Medals_Samples_Feb26`, the acquisition dates encoded
 | Total spectra | 3,200 |
 | Wavelength channels per spectrum | 2,048 |
 | Total intensity values | 6,553,600 |
-| Supporting files | 1 composition JSON, 1 settings TXT, 3 JPEG images |
+| Supporting files | 1 composition JSON, 1 TXT file, 3 JPEG images |
 | Directory size | Approximately 31.85 MiB |
 | Acquisition date in filenames | 11 March 2026 |
 | Filename time span | 16:20:55–16:47:45 |
@@ -192,7 +199,9 @@ Despite the directory name `Medals_Samples_Feb26`, the acquisition dates encoded
 | `SS465-1` | Sample label only | Not provided |
 | `SS467` | Sample label only | Not provided |
 
-The dataset is balanced by sample ID, with 200 spectra for each of the 16 IDs. These IDs should not automatically be interpreted as 16 independently verified industrial grades.
+The dataset is balanced by sample ID, with 200 spectra per sample.
+
+These 16 IDs should not automatically be interpreted as 16 independently verified industrial grades.
 
 ## 4.4 CSV and Spectral Specifications
 
@@ -209,27 +218,7 @@ The dataset is balanced by sample ID, with 200 spectra for each of the 16 IDs. T
 | Intensity representation | Integer values |
 | Observed intensity range | 496–65,535 |
 
-## 4.5 Acquisition Hardware and Settings
-
-The `Einstellungen.txt` file records the following available settings.
-
-| Setting | Recorded value |
-|---|---|
-| Spectrometer manufacturer | Avantes |
-| Spectrometer designation | AS7010 |
-| Channels | 2,048 |
-| Instrument identifier | 7518629SP |
-| Exposure time | 0.1 ms (100 µs) |
-| Laser | RevAmp |
-| Pulse divider | 2 |
-| Stated pulse operation | 25 Hz, single pulse |
-| Current setting | 630 A |
-
-The following parameters are not specified in the available metadata: laser wavelength, pulse energy, pulse duration, spot size, collection geometry, and trigger delay.
-
-Most adjacent `TimeStamp` values differ by approximately 20 units. The timestamp unit is not documented, so shot timing or repetition rate should not be inferred directly from these values without confirmation.
-
-## 4.6 Quality Checks
+## 4.5 Quality Checks
 
 | Check | Result |
 |---|---|
@@ -239,7 +228,7 @@ Most adjacent `TimeStamp` values differ by approximately 20 units. The timestamp
 | Values equal to 65,535 | 1,641 |
 | Spectra containing at least one 65,535 value | 492 of 3,200 (15.4%) |
 
-Repeated values of `65,535` suggest possible detector saturation or clipping at some wavelengths.
+Repeated values of `65,535` suggest possible saturation or clipping at some wavelengths.
 
 ---
 
@@ -247,9 +236,14 @@ Repeated values of `65,535` suggest possible detector saturation or clipping at 
 
 ## 5.1 Overview
 
-This sub-dataset contains **698 spectra across 33 CSV files**. It is divided into `ScrapSamples` (26 files, 548 spectra) and `SteelGrades` (7 files, 150 spectra).
+This sub-dataset contains **698 spectra across 33 CSV files**.
 
-Each CSV corresponds to one sample label. The number of spectra varies between **11 and 30 spectra per file**, with most files containing approximately 20–24 spectra.
+It is divided into two groups:
+
+- `ScrapSamples` — 26 files containing 548 spectra
+- `SteelGrades` — 7 files containing 150 spectra
+
+Each CSV corresponds to one sample label. The number of spectra varies between **11 and 30 per file**, with most files containing approximately 20–24 spectra.
 
 ## 5.2 General Specifications
 
@@ -270,6 +264,8 @@ Each CSV corresponds to one sample label. The number of spectra varies between *
 | Supporting metadata | No composition table, settings file, or photographs in this folder |
 
 ## 5.3 Scrap Sample Inventory
+
+The sample names below are identifiers. No verified grade assignments or chemical compositions are provided in this folder.
 
 | Sample | Spectra | Filename / data note |
 |---|---:|---|
@@ -301,7 +297,7 @@ Each CSV corresponds to one sample label. The number of spectra varies between *
 | `SS-345` | 19 | |
 | **Total** | **548** | |
 
-The `1ms` filename annotation does not establish which acquisition parameter it describes and should not automatically be interpreted as the exposure time.
+The `1ms` annotation in the filename does not establish which acquisition parameter it refers to.
 
 ## 5.4 Industrial-grade Inventory
 
@@ -314,9 +310,9 @@ The `1ms` filename annotation does not establish which acquisition parameter it 
 | `1-4539` | 1.4539 | 22 |
 | `1-4860` | 1.4860 | 21 |
 | `2-4605` | 2.4605 | 24 |
-| **Total** | | **150** |
+| **Total** |  | **150** |
 
-These labels correspond to the European material grades described earlier. The folder does not contain certificates or sample-specific measured compositions for these materials.
+The folder contains grade labels but does not provide certified sample-specific elemental compositions for these materials.
 
 ## 5.5 CSV and Spectral Specifications
 
@@ -333,13 +329,7 @@ These labels correspond to the European material grades described earlier. The f
 | Intensity representation | Integer values |
 | Observed intensity range | 403–65,535 |
 
-## 5.6 Acquisition Metadata
-
-This folder does not document the spectrometer model or serial number, dataset-wide exposure time, laser model, laser wavelength, pulse energy, laser current, repetition rate, trigger delay, collection geometry, sample movement, whether rows represent individual shots or averages, whether measurements use different surface positions, intensity calibration, or background-correction procedure.
-
-The `TimeStamp` increments are irregular and should not be used to infer a reliable laser repetition rate without additional metadata. Settings from the February/March dataset should **not** be assumed to apply to this dataset.
-
-## 5.7 Quality Checks
+## 5.6 Quality Checks
 
 | Check | Result |
 |---|---|
@@ -350,9 +340,7 @@ The `TimeStamp` increments are irregular and should not be used to infer a relia
 | Spectra containing at least one 65,535 value | 488 of 698 (69.9%) |
 | Explicitly incomplete sample | `SR-14`, 11 spectra |
 
-Although only a small fraction of individual intensity values equal `65,535`, the value occurs in approximately seven out of ten spectra and may affect strong emission-line comparisons.
-
-Equivalent byte-identical copies of these CSV collections existed elsewhere in the original development repository. This repository should contain only one canonical copy.
+Although only a small fraction of individual intensity values equal `65,535`, this maximum value occurs in approximately seven out of ten spectra and may affect strong emission-line comparisons.
 
 ---
 
@@ -360,9 +348,11 @@ Equivalent byte-identical copies of these CSV collections existed elsewhere in t
 
 ## 6.1 Overview
 
-This sub-dataset contains **79 spectra from 15 sample IDs**. Each sample is represented by one CSV file containing **five or six spectra**.
+This sub-dataset contains **79 spectra from 15 sample IDs**.
 
-The directory name identifies the measurements as moving-sample measurements. However, detailed motion parameters are not included in the available metadata.
+Each sample is represented by one CSV file containing **five or six spectra**.
+
+The folder name identifies these measurements as having been acquired under moving-sample conditions. Detailed motion parameters are not included in the available metadata.
 
 ## 6.2 General Specifications
 
@@ -380,7 +370,7 @@ The directory name identifies the measurements as moving-sample measurements. Ho
 | Acquisition date in filenames | 29 April 2026 |
 | Filename time span | 10:28:14–10:57:43 |
 | Timezone | Not specified |
-| Organisation | All files directly inside the dataset folder |
+| Organisation | All files are stored directly in the dataset folder |
 
 ## 6.3 Sample Inventory
 
@@ -402,9 +392,15 @@ The directory name identifies the measurements as moving-sample measurements. Ho
 | `SS465-1` | Sample label; composition not provided here | 5 |
 | `SS467` | Sample label; composition not provided here | 5 |
 
-The dataset contains 26 spectra from ferritic stainless-steel reference materials, 33 spectra from phosphor-bronze reference materials, and 20 spectra from the remaining four sample IDs.
+By sample family, this dataset contains:
 
-All 15 sample IDs also occur in `Medals_Samples_Feb26`. The aluminium-labelled sample `Al_ENAS-42000-1` is not present here.
+- 26 spectra from ferritic stainless-steel reference materials
+- 33 spectra from phosphor-bronze reference materials
+- 20 spectra from the remaining four sample IDs
+
+All 15 sample IDs also occur in `Medals_Samples_Feb26`.
+
+The aluminium-labelled sample `Al_ENAS-42000-1`, which appears in `Medals_Samples_Feb26`, is not present in this dataset.
 
 ## 6.4 CSV and Spectral Specifications
 
@@ -423,13 +419,24 @@ All 15 sample IDs also occur in `Medals_Samples_Feb26`. The aluminium-labelled s
 
 ## 6.5 Moving-sample Metadata
 
-The available metadata do not specify sample speed, trajectory, number of passes, measurement position, relationship between spectra and individual passes, spectrometer model or serial number, exposure time, laser wavelength, pulse energy, pulse duration, repetition rate, trigger synchronisation, or whether each row is a single-shot spectrum or an averaged acquisition.
+The available metadata do not specify:
 
-The five JPEG images may provide supporting visual information. Their filenames include an April 15 date, whereas the CSV filenames encode acquisition on April 29. The CSV filename date should therefore be retained as the spectral acquisition date unless additional documentation establishes otherwise.
+- sample speed
+- motion trajectory
+- number of passes
+- measurement position
+- relationship between spectra and individual passes
+- whether each row is a single-shot spectrum or an averaged acquisition
+
+The five JPEG files provide supporting visual information associated with this dataset.
+
+Their filenames contain an April 15 date, whereas the spectral CSV filenames encode acquisition on April 29. The CSV filename date is therefore used as the spectral acquisition date unless additional documentation establishes otherwise.
 
 ## 6.6 Relationship to Background-corrected Data
 
-In the original development repository, each of the 15 CSV files has a corresponding background-corrected file in a separate dataset directory. The corrected filenames append `_removedBG`.
+Corresponding background-corrected versions of these measurements existed in the original development repository.
+
+The corrected filenames append `_removedBG`, for example:
 
 ```text
 469_LSA_ava_S20260429102814_E20260429102933.csv
@@ -437,8 +444,6 @@ In the original development repository, each of the 15 CSV files has a correspon
 ```
 
 The background-corrected collection is not included here as a separate primary dataset because it is a derived version of the original measurements.
-
-The pairing of filenames supports treating the two as original/processed counterparts, but the available metadata do not fully document the background-correction algorithm.
 
 ## 6.7 Quality Checks
 
@@ -451,11 +456,11 @@ The pairing of filenames supports treating the two as original/processed counter
 | Spectra containing at least one 65,535 value | 28 of 79 (35.4%) |
 | Samples without any 65,535 values | `471`, `551`, `M2-7_A3` |
 
-The repeated maximum value of `65,535` suggests possible saturation or clipping in some channels.
+Repeated values of `65,535` suggest possible saturation or clipping in some channels.
 
 ---
 
-# 7. Relationship Between the Three Datasets
+# 7. Comparison of the Three Datasets
 
 | Characteristic | `Medals_Samples_Feb26` | `Medals_MovingSamples_2026-04-29` | `July2026_ScrapSamples` |
 |---|---|---|---|
@@ -466,26 +471,27 @@ The repeated maximum value of `65,535` suggests possible saturation or clipping 
 | BAS/BCS references | Yes | Yes | No |
 | European material grades | No | No | Yes |
 | Scrap samples | No | No | Yes |
-| Moving-sample acquisition | No / not indicated | Yes | Not documented |
-| Sample-specific composition metadata | Available for BAS/BCS references | Available only through corresponding reference information from the other dataset | Not provided |
-| Acquisition settings file | Yes | No | No |
-| Images | Yes | Yes | No |
+| Moving-sample acquisition | Not indicated | Yes | Not documented |
+| Sample-specific composition metadata | Available for BAS/BCS references | Reference compositions available through corresponding BAS/BCS information | Not provided |
+| Images | 3 JPEGs | 5 JPEGs | No |
 
 ---
 
 # 8. Data Quality and Interpretation Notes
 
-## 8.1 Ground-truth availability
+## 8.1 Ground-truth Availability
 
 Not all samples have corresponding elemental composition information.
 
 - BAS/BCS samples `469–473` and `551–556` have reference composition information.
-- The European material-number samples in the July dataset have grade labels and published specification ranges, but no certified sample-specific elemental concentrations.
+- European material-number samples in the July dataset have published grade specifications, but no certified sample-specific elemental concentrations.
 - Several sample IDs are labels only.
 
-## 8.2 Possible clipping / saturation
+## 8.2 Possible Clipping / Saturation
 
-Some spectra contain intensity values equal to `65,535`, the maximum value of an unsigned 16-bit integer. This strongly suggests possible detector saturation or clipping, particularly at strong emission lines.
+Some spectra contain intensity values equal to `65,535`, the maximum value of an unsigned 16-bit integer.
+
+This strongly suggests possible clipping or saturation in some channels.
 
 | Dataset | Values equal to 65,535 | Spectra affected |
 |---|---:|---:|
@@ -493,49 +499,56 @@ Some spectra contain intensity values equal to `65,535`, the maximum value of an
 | `Medals_MovingSamples_2026-04-29` | 75 | 28 / 79 (35.4%) |
 | `July2026_ScrapSamples` | 3,520 | 488 / 698 (69.9%) |
 
-## 8.3 Timestamp interpretation
+## 8.3 Timestamp Interpretation
 
-`TimeStamp` is stored as an integer in the CSV files. Its unit, reference origin, synchronisation with the laser, and relationship to acquisition timing are not fully documented.
+`TimeStamp` is stored as an integer in the CSV files.
 
-Timing or repetition-rate conclusions should therefore not be derived from these values without additional confirmation.
+Its unit and reference origin are not fully documented. Timing conclusions should therefore not be derived from these values without additional confirmation.
 
-## 8.4 Wavelength channel spacing
+## 8.4 Wavelength Channel Spacing
 
-The wavelength grid is nonuniform. The mean spacing of approximately 0.2711 nm is a channel-sampling property and should not be reported as the optical spectral resolution of the instrument.
+The wavelength grid is nonuniform.
 
-## 8.5 Dataset splitting and modelling
+The mean spacing of approximately 0.2711 nm is a channel-sampling property and should not be reported as the optical spectral resolution.
 
-Users should take care when constructing machine-learning train/test splits.
+## 8.5 Dataset Splitting and Modelling
 
-For `Medals_Samples_Feb26`, randomly splitting individual spectra may place spectra from the same measurement file in both training and test sets. Grouping by measurement file provides a more meaningful evaluation across acquisitions, although this still does not necessarily represent generalisation to new physical specimens.
+Care should be taken when constructing train/test splits.
 
-For `Medals_MovingSamples_2026-04-29` and `July2026_ScrapSamples`, most sample labels are represented by only one CSV file. Therefore, a file-level split cannot preserve every label in both training and test sets. A random row-level split in these cases evaluates performance on spectra from the same acquisition file rather than on independently measured specimens.
+For `Medals_Samples_Feb26`, randomly splitting individual spectra may place spectra from the same measurement file in both training and test sets. Grouping by measurement file provides a more meaningful evaluation across acquisitions.
 
----
+For `Medals_MovingSamples_2026-04-29` and `July2026_ScrapSamples`, most labels are represented by only one CSV file. A row-level random split would therefore evaluate spectra from the same acquisition rather than independent measurements.
 
-# 9. Data Scope and Excluded Collections
-
-This repository includes the three measured datasets selected for the D4.6 release.
-
-Other measured or processed collections from the development repository are not included as separate primary datasets when they:
-
-- were acquired using earlier LIBS configurations not aligned with the selected wavelength range / measurement configuration;
-- duplicated data already included here;
-- contained only minor processing differences;
-- represented derived data, such as background-corrected versions that can be generated from the corresponding raw measurements.
-
-This keeps the repository focused on the primary measured-data collections.
+These datasets should not automatically be interpreted as demonstrating generalisation to new physical specimens.
 
 ---
 
-# 10. Loading the Data in Python
+# 9. Data Scope
 
-The files can be loaded directly with `pandas`.
+This repository contains the three measured datasets selected for the D4.6 data release.
+
+Other collections from the development repository are not included as separate primary datasets when they:
+
+- use an earlier or different spectral configuration;
+- duplicate data already included here;
+- contain only minor processing differences;
+- represent derived versions of the original measurements, such as background-corrected data.
+
+The purpose is to keep this repository focused on the primary measured-data collections.
+
+---
+
+# 10. Loading a Spectrum in Python
+
+The CSV files can be loaded directly with `pandas`.
 
 ```python
 import pandas as pd
 
-file_path = "Medals_Samples_Feb26/469/LSA_ava_S20260311162055_E20260311162058.csv"
+file_path = (
+    "Medals_Samples_Feb26/469/"
+    "LSA_ava_S20260311162055_E20260311162058.csv"
+)
 
 df = pd.read_csv(file_path, sep=";")
 
@@ -549,75 +562,78 @@ print(df.shape)
 print(wavelengths.min(), wavelengths.max())
 ```
 
-For this file format:
+The columns are organised as:
 
 ```text
-columns 0-1   -> metadata
-columns 2-end -> spectral intensity values
+columns 0–1   -> metadata
+columns 2–end -> spectral intensity values
 ```
 
 ---
 
-# 11. Spectrum Viewer
+# 11. Streamlit Spectrum Viewer
 
-A lightweight Streamlit viewer can be provided in `viewer.py` to simplify exploration of the repository.
-
-The intended workflow is:
+The repository already includes a lightweight Streamlit spectrum viewer:
 
 ```text
-Select dataset
-    ↓
-Select sample / CSV file
-    ↓
-Select one or more spectra
-    ↓
-Plot LIBS intensity versus wavelength
+viewer.py
 ```
 
-Useful viewer functions may include:
+The viewer makes it possible to browse and visualise the measured spectra without writing additional code.
 
-- selecting a dataset;
-- selecting a sample or CSV file;
-- plotting a single spectrum;
-- plotting multiple spectra;
-- plotting the average spectrum of a file;
-- displaying basic file and sample information.
+It supports:
 
-When `viewer.py` is available, it can be run with:
+- selection of any of the three datasets;
+- recursive discovery and selection of CSV files;
+- automatic identification of the sample label;
+- plotting a **single spectrum**;
+- plotting **multiple spectra**;
+- plotting the **average spectrum** of a selected CSV file;
+- restricting the displayed wavelength range;
+- optional logarithmic intensity scaling;
+- inspection of the `MeasCtr` and `TimeStamp` metadata;
+- display of basic file information, including number of spectra, number of wavelength channels, wavelength range, and observed intensity range.
+
+## Running the Viewer
+
+Install the required Python packages:
 
 ```bash
 pip install streamlit pandas matplotlib
+```
+
+Then run the viewer from the repository root:
+
+```bash
 streamlit run viewer.py
 ```
 
-**TO BE COMPLETED:** update this section once the final viewer implementation is added.
+The basic workflow is:
 
----
-
-# 12. Access
-
-The repository is intended to provide direct access to the measured datasets associated with MEDALS Deliverable D4.6.
-
-```bash
-git clone <repository-url>
-cd MEDALS-measured-datasets
+```text
+Select dataset
+      ↓
+Select CSV file
+      ↓
+Choose plot mode
+      ↓
+Inspect the LIBS spectrum
 ```
 
-**TO BE COMPLETED:** insert the final public repository URL after publication.
-
 ---
 
-# 13. References
+# 12. References
 
-1. Bureau of Analysed Samples Ltd. (BAS), *Certified Reference Materials Catalogue*, Catalogue No. 932, March 2025.
-2. Published manufacturer / material-database specifications for European material grades 1.3974, 1.4301, 1.4404, 1.4462, 1.4539, 1.4860, and 2.4605.
+1. Bureau of Analysed Samples Ltd. (BAS), *Certified Reference Materials Catalogue*, Catalogue No. 932, March 2025.  
+   Website: https://www.basrid.co.uk/
+
+2. Published manufacturer and material-database specifications for European material grades `1.3974`, `1.4301`, `1.4404`, `1.4462`, `1.4539`, `1.4860`, and `2.4605`.
+
 3. MEDALS Deliverable D4.6 — *MeasData: Open measured data set*.
 
-**TO BE COMPLETED:** add final source details / URLs for the European material-grade specifications and the public dataset release.
-
 ---
 
-# 14. Project Information
+# 13. Project Information
 
 **Project:** Metallic Elements Dissipation Avoided by Life cycle design for Steel  
 **Acronym:** MEDALS  
