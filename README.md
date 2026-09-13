@@ -1,3 +1,6 @@
+![Representative LIBS spectra for sample 469](images/viewer.png)
+
+
 # MEDALS Measured Datasets
 
 This repository contains measured Laser-Induced Breakdown Spectroscopy (LIBS) datasets collected within the Horizon Europe **MEDALS** project — *Metallic Elements Dissipation Avoided by Life cycle design for Steel* (Grant Agreement No. 101138516).
