@@ -1,0 +1,2 @@
+Spektrometer: Avantes, AS7010 2048 341.952...896.916 7518629SP, 0.1 ms Belichtungszeit
+Laser: RevAmp, Pulse divider 2 (25 Hz, single pulse), 630 A

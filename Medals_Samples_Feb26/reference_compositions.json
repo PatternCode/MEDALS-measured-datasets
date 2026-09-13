@@ -1,0 +1,169 @@
+{
+    "materialCompositions": [
+        {
+            "materialType": "Ferritic Stainless Steel",
+            "referenceMaterial": true,
+            "directoryPath": "/home/puser/Work/PhD/Datasets/Partner Data/LSA/Medals_Samples_Feb26",
+            "materials": [
+                {
+                    "materialName": "469",
+                    "composition": {
+                        "C": 0.279,
+                        "Si": 0.421,
+                        "Mn": 0.598,
+                        "P": 0.015,
+                        "S": 0.02,
+                        "Cr": 11.93,
+                        "Ni": 0.246,
+                        "Fe": "#"
+                    }
+                },
+                {
+                    "materialName": "470",
+                    "composition": {
+                        "C": 0.153,
+                        "Si": 0.335,
+                        "Mn": 0.235,
+                        "P": 0.024,
+                        "S": 0.035,
+                        "Cr": 17.68,
+                        "Ni": 0.369,
+                        "Fe": "#"
+                    }
+                },
+                {
+                    "materialName": "471",
+                    "composition": {
+                        "C": 0.095,
+                        "Si": 0.326,
+                        "Mn": 0.417,
+                        "P": 0.018,
+                        "S": 0.023,
+                        "Cr": 23.85,
+                        "Ni": 0.96,
+                        "Fe": "#"
+                    }
+                },
+                {
+                    "materialName": "472",
+                    "composition": {
+                        "C": 0.227,
+                        "Si": 1.05,
+                        "Mn": 1.02,
+                        "P": 0.032,
+                        "S": 0.029,
+                        "Cr": 15.82,
+                        "Mo": 0.661,
+                        "Ni": 1.95,
+                        "Fe": "#"
+                    }
+                },
+                {
+                    "materialName": "473",
+                    "composition": {
+                        "C": 0.172,
+                        "Si": 0.604,
+                        "Mn": 0.494,
+                        "P": 0.019,
+                        "S": 0.03,
+                        "Cr": 9.06,
+                        "Mo": 0.95,
+                        "Fe": "#"
+                    }
+                }
+            ]
+        },
+        {
+            "materialType": "Phosphor Bronzes",
+            "referenceMaterial": true,
+            "directoryPath": "/home/puser/Work/PhD/Datasets/Partner Data/LSA/Medals_Samples_Feb26",
+            "materials" : [
+                {
+                    "materialName": "551",
+                    "composition": {
+                        "Sn": 8.92,
+                        "P": 1.01,
+                        "Pb": 0.79,
+                        "Ni": 0.76,
+                        "Zn": 0.74,
+                        "Cu": 87.4,
+                        "Si": 0.018,
+                        "Fe": 0.20,
+                        "Al": 0.052
+                    }
+                },
+                {
+                    "materialName": "552",
+                    "composition": {
+                        "Sn": 9.78,
+                        "P": 0.77,
+                        "Pb": 0.63,
+                        "Ni": 0.56,
+                        "Zn": 0.35,
+                        "Cu": 87.7,
+                        "Si": 0.019,
+                        "Fe": 0.10,
+                        "Al": 0.023
+                    }
+                },
+                {
+                    "materialName": "553",
+                    "composition": {
+                        "Sn": 10.8,
+                        "P": 0.68,
+                        "Pb": 0.47,
+                        "Ni": 0.44,
+                        "Zn": 0.49,
+                        "Cu": 87.0,
+                        "Si": 0.022,
+                        "Fe": 0.056,
+                        "Al": 0.017
+                    }
+                },
+                {
+                    "materialName": "554",
+                    "composition": {
+                        "Sn": 11.3,
+                        "P": 0.41,
+                        "Pb": 0.34,
+                        "Ni": 0.22,
+                        "Zn": 0.22,
+                        "Cu": 87.4,
+                        "Si": 0.038,
+                        "Fe": 0.022,
+                        "Al": 0.005
+                    }
+                },
+                {
+                    "materialName": "555",
+                    "composition": {
+                        "Sn": 12.1,
+                        "P": 0.18,
+                        "Pb": 0.24,
+                        "Ni": 0.11,
+                        "Zn": 0.16,
+                        "Cu": 87.1,
+                        "Si": 0.036,
+                        "Fe": 0.01,
+                        "Al": 0.005
+                    }
+                },
+                {
+                    "materialName": "556",
+                    "composition": {
+                        "Sn": 13.2,
+                        "P": 0.10,
+                        "Pb": 0.16,
+                        "Ni": 0.014,
+                        "Zn": 0.09,
+                        "Cu": 86.4,
+                        "Si": 0.005,
+                        "Fe": 0.004,
+                        "Al": 0.005
+                    }
+                }
+            ]
+        }
+    ]
+	
+} 
